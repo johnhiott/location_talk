@@ -174,6 +174,11 @@ registerReceiver(locationReceiver, locationIntentFilter);
 ^ If we take the passive provider one step further, we can get location updates without your app even being open.  Let's say you just used Maps to navigate to a new restaurant, with each location update Maps receives, your app gets one too.  So now a user opens your app to check in or get some details about the new place, the last location received is probably close enough to work for your app.
 
 ---
+
+#Sample Flow
+![inline](http://developer.android.com/images/location/getting-location.png)
+
+---
 # Google Location Services
 
 ^ The Android API's seem easy enough.  However, there is a lot to account for.  What if someone turns GPS on or off??  Are you using the best provider that is enabled that meets your criteria????  Using Android's APIs, you have to account for all of this and switch providers when needed.  This can become a headache.  However, Google Play Services provides us with a set of API's designed to help us out with this.
@@ -255,3 +260,33 @@ public void onLocationChanged(Location location) {
 }
 
 ```
+
+^ setInterval - rate at which you prefer to receive updates - might not always be true, could be slower, or faster, or none depending on connectivity
+
+^ setFastestInterval - the max rate at which you receive updates - other app maybe using Play Services at a faster rate... could want to slow it down to keep app responsive or prevent UI flicker
+
+^ setPriority get it's own slide.
+
+---
+## setPriority(priority);
+
+- PRIORITY\_BALANCED\_POWER\_ACCURACY - Precision of a city block (100m) likely to use WiFi and cell tower positioning.
+- PRIORITY\_HIGH\_ACCURACY - most precise. Likely to use GPS.
+- PRIORITY\_LOW\_POWER - city-level precision(10 kilometers). Coarse level of accuracy, likely to consume less power.
+- PRIORITY\_NO\_POWER - negligible power consumption, receives updates when available. does not trigger any updates, but receives location from other apps.  Remember the passive provdier??
+
+---
+# Key Points
+
+- Remember the battery!
+- Use best provider!
+- Get what you need!
+
+
+If you can:
+
+- Use Play Services
+
+---
+# The Talk
+## https://github.com/johnhiott/location_talk/
